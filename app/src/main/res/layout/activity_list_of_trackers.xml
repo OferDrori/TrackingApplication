@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ListOfTrackersActivity"
+    android:background="#F8F5F5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16px">
+
+        <TextView
+            android:id="@+id/ListOfTrackersActivity_welcome_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:text="choose witch one you want to spy"
+            android:textSize="30dp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:id="@+id/groupsScreen_addNewGroup_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:lineSpacingExtra="10sp"
+                android:text="+ add a new tracker"
+                android:textColor="#0030FF"
+                android:textSize="20dp" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="25dp">
+            </FrameLayout>
+
+            <ListView
+                android:id="@+id/ListOfTrackersActivity_ListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:divider="@null"
+                android:dividerHeight="10dp"
+                android:stackFromBottom="true"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
