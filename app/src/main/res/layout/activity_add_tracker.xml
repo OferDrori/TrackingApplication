@@ -49,8 +49,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="35dp"
-                android:inputType="textPersonName"
-                android:hint="Tracker Name" />
+                android:hint="Tracker Name"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/addTracker_TrackerPhone_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="35dp"
+                android:inputType="number"
+                android:hint="phone number" />
 
 
 

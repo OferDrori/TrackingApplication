@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:gravity="center"
-            android:text="choose witch one you want to spy"
+            android:text="choose which one you want to spy"
             android:textSize="30dp"
             android:textColor="#000000"
             android:textStyle="bold"
@@ -32,7 +32,7 @@
             android:orientation="vertical"
             >
             <TextView
-                android:id="@+id/groupsScreen_addNewGroup_txt"
+                android:id="@+id/add_new_tracker_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -54,7 +54,7 @@
                 android:layout_marginRight="15dp"
                 android:divider="@null"
                 android:dividerHeight="10dp"
-                android:stackFromBottom="true"/>
+                android:stackFromBottom="true" />
         </LinearLayout>
 
 

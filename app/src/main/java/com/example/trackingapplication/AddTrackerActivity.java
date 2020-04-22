@@ -17,8 +17,9 @@ import com.google.firebase.database.FirebaseDatabase;
 public class AddTrackerActivity extends AppCompatActivity {
     private EditText addTrackerNameEditText;
     private Button createTrackerBtn;
+    private EditText phoneNumberEditText;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("Tracker");
+    DatabaseReference myRef = database.getReference("User");
     private FirebaseAuth mAuth;
     FirebaseUser userUID = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -28,18 +29,22 @@ public class AddTrackerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_tracker);
         addTrackerNameEditText=findViewById(R.id.addTracker_TrackerName_editText);
         createTrackerBtn=findViewById(R.id.addTracker_btn_create);
+        phoneNumberEditText = findViewById(R.id.addTracker_TrackerPhone_editText);
         mAuth = FirebaseAuth.getInstance();
         createTrackerBtn.setOnClickListener(addTracker);
+
     }
 
     View.OnClickListener addTracker = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             if(!(addTrackerNameEditText.getText().toString().equals(""))) {
-                myRef.child(userUID.getUid()).child(addTrackerNameEditText.getText().toString()).setValue("Todo Location argument ");
-                openWhatsApp(v,"+972506332027");
+                Tracker tracker = new Tracker(addTrackerNameEditText.getText().toString(), phoneNumberEditText.getText().toString());
+                myRef.child(userUID.getUid()).child(tracker.getPhoneNumber()).setValue(tracker);
+//                openWhatsApp(v,"+972506332027");
              //   Intent intent = new Intent(CreateNewGroup.this, GroupsScreen.class);
                // startActivity(intent);
+
                 finish();
             }
 
