@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.trackingapplication.ListOfTrackersActivity;
 import com.example.trackingapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -74,6 +75,9 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d("pppt","success login");
 
                             FirebaseUser user = mAuth.getCurrentUser();
+
+                            goToNextActivity(ListOfTrackersActivity.class);
+
 
                         } else {
 

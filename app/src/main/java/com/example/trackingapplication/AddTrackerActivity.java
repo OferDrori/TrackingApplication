@@ -40,7 +40,7 @@ public class AddTrackerActivity extends AppCompatActivity {
         public void onClick(View v) {
             if(!(addTrackerNameEditText.getText().toString().equals(""))) {
                 Tracker tracker = new Tracker(addTrackerNameEditText.getText().toString(), phoneNumberEditText.getText().toString());
-                myRef.child(userUID.getUid()).child(tracker.getPhoneNumber()).setValue(tracker);
+                myRef.child(userUID.getUid()).child("Trackers").child(tracker.getPhoneNumber()).setValue(tracker);
 //                openWhatsApp(v,"+972506332027");
              //   Intent intent = new Intent(CreateNewGroup.this, GroupsScreen.class);
                // startActivity(intent);

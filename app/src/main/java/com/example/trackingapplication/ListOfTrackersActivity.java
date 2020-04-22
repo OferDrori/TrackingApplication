@@ -10,11 +10,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class ListOfTrackersActivity extends AppCompatActivity {
     private ListView listViewOfTrackers;
@@ -22,6 +25,10 @@ public class ListOfTrackersActivity extends AppCompatActivity {
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference myRef = database.getReference("User");
     private FirebaseAuth mAuth;
+    private ArrayList<Tracker> arrayListOfTrackers = new ArrayList<>();
+    private TrackerAdapter trackerAdapter;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +37,21 @@ public class ListOfTrackersActivity extends AppCompatActivity {
         listViewOfTrackers = findViewById(R.id.ListOfTrackersActivity_ListView);
         addNewTrackerTextView = findViewById(R.id.add_new_tracker_text_view);
         addNewTrackerTextView.setOnClickListener(addNewTrackerFunc);
+        trackerAdapter=new TrackerAdapter(this,arrayListOfTrackers);
+        listViewOfTrackers.setAdapter(trackerAdapter);
+        FirebaseUser userUID = FirebaseAuth.getInstance().getCurrentUser();
 
-        myRef.addValueEventListener(new ValueEventListener() {
+        myRef.child(userUID.getUid()).child("Trackers").addValueEventListener(new ValueEventListener() {
             @Override
+            // Add Trackers to the list
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
+                for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                    Tracker tracker = ds.getValue(Tracker.class);
+                    arrayListOfTrackers.add(tracker);
+                }
+                listViewOfTrackers.setAdapter(trackerAdapter);//check if its necessary
+
+
             }
 
             @Override
