@@ -31,7 +31,7 @@ public class ListOfTrackersActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ArrayList<Tracker> arrayListOfTrackers = new ArrayList<>();
     private TrackerAdapter trackerAdapter;
-    MySharedPreferences msp=new MySharedPreferences(this);
+    MySharedPreferences msp;
 
 
     @Override
@@ -41,6 +41,7 @@ public class ListOfTrackersActivity extends AppCompatActivity {
         listViewOfTrackers = findViewById(R.id.ListOfTrackersActivity_ListView);
         addNewTrackerTextView = findViewById(R.id.add_new_tracker_text_view);
         addNewTrackerTextView.setOnClickListener(addNewTrackerFunc);
+        msp=new MySharedPreferences(this);
         trackerAdapter=new TrackerAdapter(this,arrayListOfTrackers);
         listViewOfTrackers.setAdapter(trackerAdapter);
         FirebaseUser userUID = FirebaseAuth.getInstance().getCurrentUser();
@@ -72,6 +73,7 @@ public class ListOfTrackersActivity extends AppCompatActivity {
                Tracker clickTracker= arrayListOfTrackers.get(i);
                msp.putString(KEY_TRACKER,gson.toJson(clickTracker));
                //TODO: go to map activity
+                goToNextActivity(TrackerMapActivity.class);
             }
         });
 
