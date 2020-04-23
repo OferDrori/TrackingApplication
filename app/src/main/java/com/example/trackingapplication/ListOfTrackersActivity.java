@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -16,8 +17,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
+
+import static com.example.trackingapplication.Keys.KEY_TRACKER;
 
 public class ListOfTrackersActivity extends AppCompatActivity {
     private ListView listViewOfTrackers;
@@ -27,7 +31,7 @@ public class ListOfTrackersActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ArrayList<Tracker> arrayListOfTrackers = new ArrayList<>();
     private TrackerAdapter trackerAdapter;
-
+    MySharedPreferences msp=new MySharedPreferences(this);
 
 
     @Override
@@ -45,19 +49,29 @@ public class ListOfTrackersActivity extends AppCompatActivity {
             @Override
             // Add Trackers to the list
             public void onDataChange(DataSnapshot dataSnapshot) {
+                arrayListOfTrackers.clear();//Not necessary just for now in the end we just need to add the end of the array
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
                     Tracker tracker = ds.getValue(Tracker.class);
                     arrayListOfTrackers.add(tracker);
                 }
                 listViewOfTrackers.setAdapter(trackerAdapter);//check if its necessary
-
-
             }
-
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
                 Log.w("TAG", "Failed to read value.", error.toException());
+            }
+        });
+
+
+
+        listViewOfTrackers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+               Gson gson=new Gson();
+               Tracker clickTracker= arrayListOfTrackers.get(i);
+               msp.putString(KEY_TRACKER,gson.toJson(clickTracker));
+               //TODO: go to map activity
             }
         });
 
