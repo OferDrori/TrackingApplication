@@ -46,7 +46,7 @@ public class ListOfTrackersActivity extends AppCompatActivity {
         listViewOfTrackers.setAdapter(trackerAdapter);
         FirebaseUser userUID = FirebaseAuth.getInstance().getCurrentUser();
 
-        myRef.child(userUID.getUid()).child("Trackers").addValueEventListener(new ValueEventListener() {
+        myRef.child("Trackers").addValueEventListener(new ValueEventListener() {//child(userUID.getUid()) if wont to add tracker to speciffic user
             @Override
             // Add Trackers to the list
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -73,7 +73,7 @@ public class ListOfTrackersActivity extends AppCompatActivity {
                Tracker clickTracker= arrayListOfTrackers.get(i);
                msp.putString(KEY_TRACKER,gson.toJson(clickTracker));
                //TODO: go to map activity
-                goToNextActivity(TrackerMapActivity.class);
+                goToNextActivity(OptionsToDo.class);
             }
         });
 

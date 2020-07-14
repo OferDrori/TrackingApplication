@@ -62,7 +62,7 @@ public class TrackerMapActivity extends FragmentActivity implements OnMapReadyCa
         mMap = googleMap;
        // changeMap();
         FirebaseUser userUID = FirebaseAuth.getInstance().getCurrentUser();
-        myRef.child(userUID.getUid()).child("Trackers").child(tracker.getPhoneNumber()).addValueEventListener(new ValueEventListener() {
+        myRef.child("Trackers").child(tracker.getPhoneNumber()).addValueEventListener(new ValueEventListener() {
             @Override
             // Add Trackers to the list
             public void onDataChange(DataSnapshot dataSnapshot) {
